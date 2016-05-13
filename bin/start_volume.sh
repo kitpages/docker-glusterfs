@@ -26,7 +26,8 @@ echo "PEER = ${GLUSTER_PEER}"
 echo "PEER LIST = ${GLUSTER_PEER_LIST}"
 echo "NUMBER OF REPLICA = ${GLUSTER_REPLICA}"
 
-mkdir -p /data/brick1/gv0
+PARAMETER_LIST=`for i in "${TAB[@]}"; do echo "$i:/data/brick1/gv0";done `
+echo "PARAMETER_LIST = ${PARAMETER_LIST}"
 
-# run glusterd with supervisord
-/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+gluster volume create gv0 replica ${GLUSTER_REPLICA} ${PARAMETER_LIST}
+

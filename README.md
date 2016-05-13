@@ -24,11 +24,11 @@ data1 has to be replaced by data2 or data3 for the GLUSTER_BRICK env var.
 ```bash
 for server in data1 data2 data3; do
     ssh root@${server} "
-        docker run -ti --rm --name=glusterfs \
+        docker run -d --name=glusterfs \
             --net=host \
             --env GLUSTER_PEER=${server} \
             --env GLUSTER_VOLUME=my_volume \
-            --env GLUSTER_PEER_LIST="data1|data2|data3" \
+            --env GLUSTER_PEER_LIST='data1|data2|data3' \
             --volume /etc/hosts:/etc/hosts:ro \
             --volume /var/gluster/data:/gluster_data \
             kitpages/docker-glusterfs /usr/local/bin/run_daemon.sh \
@@ -43,7 +43,7 @@ on each nodes
 ```bash
 for server in data1 data2 data3; do
     ssh root@${server} "
-        docker exec -ti glusterfs bin/probe_other_peers.sh
+        docker exec -i glusterfs /usr/local/bin/probe_other_peers.sh
     "
 done
 ```
@@ -53,7 +53,7 @@ done
 On anyone of the nodes
 
 ```bash
-docker exec -ti glusterfs bin/start_volume.sh
+docker exec -i glusterfs bin/start_volume.sh
 ```
 
 4) connect the client to the cluster
@@ -63,6 +63,6 @@ docker exec -ti glusterfs bin/start_volume.sh
 References
 ----------
 
-This dockerfile is widely inspired from this blog post from rancher :
+This dockerfile is a bit inspired from this blog post from rancher :
 http://rancher.com/creating-a-glusterfs-cluster-for-docker-on-aws/
 
