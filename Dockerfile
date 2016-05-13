@@ -3,10 +3,17 @@ FROM ubuntu:15.10
 MAINTAINER Philippe Le Van (twitter: @plv)
 
 RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common && \
+    apt-get install -y \
+    	python-software-properties \
+    	software-properties-common \
+    	vim \
+    	&& \
 	add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
     apt-get update && \
-    apt-get install -y glusterfs-server supervisor && \
+    apt-get install -y \
+    	glusterfs-server \
+		supervisor \
+		&& \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
