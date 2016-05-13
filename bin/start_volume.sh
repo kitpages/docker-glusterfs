@@ -26,7 +26,7 @@ echo "PEER = ${GLUSTER_PEER}"
 echo "PEER LIST = ${GLUSTER_PEER_LIST}"
 echo "NUMBER OF REPLICA = ${GLUSTER_REPLICA}"
 
-PARAMETER_LIST=`for i in "${TAB[@]}"; do echo "$i:/data/brick1/gv0";done `
+PARAMETER_LIST=`for i in "${TAB[@]}"; do echo -n "$i:/gluster_data/brick1/gv0 ";done `
 echo "PARAMETER_LIST = ${PARAMETER_LIST}"
 
 gluster volume create gv0 replica ${GLUSTER_REPLICA} ${PARAMETER_LIST}

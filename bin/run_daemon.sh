@@ -26,7 +26,7 @@ echo "PEER = ${GLUSTER_PEER}"
 echo "PEER LIST = ${GLUSTER_PEER_LIST}"
 echo "NUMBER OF REPLICA = ${GLUSTER_REPLICA}"
 
-mkdir -p /data/brick1/gv0
+mkdir -p /gluster_data/brick1/gv0
 
 # run glusterd with supervisord
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
