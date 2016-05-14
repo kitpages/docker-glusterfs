@@ -26,7 +26,7 @@ data1 has to be replaced by data2 or data3 for the GLUSTER_BRICK env var.
 ```bash
 for server in data1 data2 data3; do
     ssh root@${server} "
-        docker run -d --name=glusterfs --privileged=true \
+        docker run --rm -d --name=glusterfs --privileged=true \
             --net=host \
             --env GLUSTER_PEER=${server} \
             --env GLUSTER_VOLUME=my_volume \
@@ -55,7 +55,7 @@ done
 On anyone of the nodes
 
 ```bash
-docker exec -i glusterfs bin/start_volume.sh
+docker exec -i glusterfs /usr/local/bin/start_volume.sh
 ```
 
 4) connect the client to the cluster
