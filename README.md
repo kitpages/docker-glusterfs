@@ -26,7 +26,8 @@ data1 has to be replaced by data2 or data3 for the GLUSTER_BRICK env var.
 ```bash
 for server in data1 data2 data3; do
     ssh root@${server} "
-        docker run --rm -d --name=glusterfs --privileged=true \
+        docker rm glusterfs ; \
+        docker run -d --name=glusterfs --privileged=true \
             --net=host \
             --env GLUSTER_PEER=${server} \
             --env GLUSTER_VOLUME=my_volume \
